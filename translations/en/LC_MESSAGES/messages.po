@@ -1,0 +1,313 @@
+# English translations for PROJECT.
+# Copyright (C) 2025 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2025-07-01 01:11-0600\n"
+"PO-Revision-Date: 2025-06-10 16:07-0600\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.15.0\n"
+
+#: app.py:214 app.py:273
+msgid "Tablero no existe o no estas autorizado"
+msgstr "Board does not exist or you are not authorized"
+
+#: app.py:244
+msgid "¿Eliminar este tablero? No se puede deshacer"
+msgstr "Delete this board? Can't be undone"
+
+#: app.py:252 app.py:293 app.py:319 app.py:340 app.py:372 app.py:399 app.py:427
+msgid "No autorizado"
+msgstr "Unauthorized"
+
+#: app.py:515
+msgid "No hay usuario con esta ID"
+msgstr "No user has this ID"
+
+#: app.py:524
+msgid "Este usuario ya es tu amigo o tiene solicitud pendiente."
+msgstr "You're already friends with this user or has a pending request."
+
+#: templates/board.html:21
+msgid "¿Eliminar lista? También se eliminarán sus tarjetas"
+msgstr "Delete list? All it's cards will be deleted"
+
+#: templates/board.html:49
+msgid "Editar Tarjeta"
+msgstr "Edit Card"
+
+#: templates/board.html:49
+msgid "Nueva Tarjeta"
+msgstr "New Card"
+
+#: templates/board.html:71 templates/friends.html:35 templates/home.html:17
+#: templates/new_board.html:17
+msgid "Ver Tableros"
+msgstr "View Boards"
+
+#: templates/board.html:72 templates/boards.html:28 templates/friends.html:36
+#: templates/home.html:18 templates/new_board.html:18
+msgid "Cerrar Sesión"
+msgstr "Log Out"
+
+#: templates/board.html:73 templates/boards.html:29 templates/friends.html:37
+#: templates/login.html:24 templates/new_board.html:19
+#: templates/register.html:27
+msgid "Home"
+msgstr "Home"
+
+#: templates/board.html:80
+msgid "Error tablero vacio"
+msgstr "Empty board error"
+
+#: templates/board.html:105
+msgid "Creada: "
+msgstr "Made in: "
+
+#: templates/board.html:106
+msgid "Vence: "
+msgstr "Due: "
+
+#: templates/board.html:110
+msgid "Agregar Tarjeta"
+msgstr "Add Card"
+
+#: templates/board.html:121
+msgid "Eliminar Tablero"
+msgstr "Delete Board"
+
+#: templates/board.html:130
+msgid "Título de la Tarjeta:"
+msgstr "Card Title:"
+
+#: templates/board.html:132 templates/new_board.html:26
+msgid "Descripción:"
+msgstr "Description:"
+
+#: templates/board.html:135
+msgid "Fecha de Vencimiento:"
+msgstr "Due Date:"
+
+#: templates/board.html:138
+msgid "Nunca"
+msgstr "Never"
+
+#: templates/board.html:141 templates/board.html:151 templates/boards.html:89
+msgid "Guardar"
+msgstr "Save"
+
+#: templates/board.html:148
+msgid "Renombrar"
+msgstr "Rename"
+
+#: templates/boards.html:5 templates/boards.html:32
+msgid "Mis Tableros"
+msgstr "My Boards"
+
+#: templates/boards.html:27 templates/new_board.html:5
+msgid "Nuevo Tablero"
+msgstr "New Board"
+
+#: templates/boards.html:37
+msgid "Título"
+msgstr "Title"
+
+#: templates/boards.html:38
+msgid "Descripción"
+msgstr "Description"
+
+#: templates/boards.html:39
+msgid "Fecha de creación"
+msgstr "Creation Date"
+
+#: templates/boards.html:54
+msgid "--Sin descripción--"
+msgstr "--No description--"
+
+#: templates/boards.html:58
+msgid "Compartir"
+msgstr "Share"
+
+#: templates/boards.html:63
+msgid "Ver"
+msgstr "View"
+
+#: templates/boards.html:72
+msgid "No tienes ningun tablero."
+msgstr "You don't have any boards."
+
+#: templates/boards.html:73
+msgid "Crear Nuevo Tablero"
+msgstr "Create New Board"
+
+#: templates/boards.html:80
+msgid "Cambiar Acceso del Tablero"
+msgstr "Change Board Access"
+
+#: templates/boards.html:83
+msgid "Selecciona:"
+msgstr "Select:"
+
+#: templates/boards.html:85 templates/new_board.html:33
+msgid "Privado"
+msgstr "Private"
+
+#: templates/boards.html:86 templates/friends.html:5 templates/friends.html:40
+#: templates/friends.html:49 templates/new_board.html:34
+msgid "Amigos"
+msgstr "Friends"
+
+#: templates/boards.html:87 templates/new_board.html:35
+msgid "Público"
+msgstr "Public"
+
+#: templates/friends.html:21
+msgid "No puedes usar tu propia ID"
+msgstr "You can't use your own ID"
+
+#: templates/friends.html:42
+msgid "Buscar por ID:"
+msgstr "Search by ID:"
+
+#: templates/friends.html:43
+msgid "Tu ID: "
+msgstr "Your ID:"
+
+#: templates/friends.html:45
+msgid "Agregar amigo"
+msgstr "Add Friend"
+
+#: templates/friends.html:60
+msgid "Eliminar"
+msgstr "Delete"
+
+#: templates/friends.html:65
+msgid "Agrega amigos para ver tus tableros."
+msgstr "Add friends to view your boards."
+
+#: templates/friends.html:69
+msgid "Solicitudes Recividas"
+msgstr "Received Requests"
+
+#: templates/friends.html:80
+msgid "Aceptar"
+msgstr "Accept"
+
+#: templates/friends.html:82
+msgid "Ignorar"
+msgstr "Ignore"
+
+#: templates/friends.html:87
+msgid "No has recibido."
+msgstr "Inbox empty."
+
+#: templates/friends.html:92
+msgid "Solicitudes Enviadas"
+msgstr "Sent Requests"
+
+#: templates/friends.html:99
+msgid "(Ignorado)"
+msgstr "(Ignored)"
+
+#: templates/friends.html:106
+msgid "Cancelar"
+msgstr "Cancel"
+
+#: templates/friends.html:111
+msgid "No has enviado."
+msgstr "You haven't sent any."
+
+#: templates/home.html:5
+msgid "Inicio"
+msgstr "Home"
+
+#: templates/home.html:20 templates/login.html:34
+msgid "Iniciar Sesión"
+msgstr "Log In"
+
+#: templates/home.html:21 templates/register.html:40
+msgid "Registrarse"
+msgstr "Register"
+
+#: templates/home.html:26
+msgid "CollabBoard"
+msgstr "CollabBoard"
+
+#: templates/home.html:28
+msgid "Crear un Tablero"
+msgstr "Create a Board"
+
+#: templates/login.html:5
+msgid "Login"
+msgstr "Login"
+
+#: templates/login.html:13
+msgid "Correo o contraseña incorrectos"
+msgstr "Incorrect email or password"
+
+#: templates/login.html:28
+msgid "Inicio de sesión"
+msgstr "Login"
+
+#: templates/login.html:30 templates/register.html:34
+msgid "Correo Electrónico:"
+msgstr "Email:"
+
+#: templates/login.html:32 templates/register.html:36
+msgid "Contraseña:"
+msgstr "Password:"
+
+#: templates/login.html:37
+msgid "o Regístrate"
+msgstr "or Sign Up"
+
+#: templates/new_board.html:22
+msgid "Crear un nuevo tablero"
+msgstr "Create a new board"
+
+#: templates/new_board.html:24
+msgid "Título del Tablero:"
+msgstr "Board Title:"
+
+#: templates/new_board.html:29
+msgid "Número de listas:"
+msgstr "Number of lists:"
+
+#: templates/new_board.html:31
+msgid "Acceso:"
+msgstr "Access:"
+
+#: templates/new_board.html:37
+msgid "Crear Tablero"
+msgstr "Create Board"
+
+#: templates/register.html:5 templates/register.html:30
+msgid "Registro"
+msgstr "Registration"
+
+#: templates/register.html:16
+msgid "Las contraseñas no coinciden."
+msgstr "Passwords do not match."
+
+#: templates/register.html:32
+msgid "Nombre:"
+msgstr "Name:"
+
+#: templates/register.html:38
+msgid "Repetir Contraseña:"
+msgstr "Repeat Password:"
+
+#: templates/register.html:43
+msgid "o Inicia Sesión"
+msgstr "or Log In"
+

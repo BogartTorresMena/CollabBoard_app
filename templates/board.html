@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{board.titulo}} - CollabBoard</title>
+    <link rel="icon"href="{{url_for('static',filename='img/logo.png')}}"type="image/x-icon">
+    <link rel="stylesheet"href="{{url_for('static',filename='css/style.css')}}">
+    <style>
+        h3{margin-left:40px;}
+    </style>
+    <script>
+        function toggleFecha() {
+            const cb=document.getElementById("cb");
+            const date=document.getElementById("fv");
+            date.disabled=cb.checked;
+            if(cb.checked){
+                date.value='';
+            }
+        }
+        function delList(b_id,l_id) {
+            const msg="{{_('¿Eliminar lista? También se eliminarán sus tarjetas')}}";
+            if(confirm(msg)){
+                window.location.href=`/board/${b_id}/delete_list/${l_id}`;
+            }
+        }
+        function delCard(b_id,c_id) {
+            window.location.href=`/board/${b_id}/delete_card/${c_id}`;
+        }
+        function openRMod(b_id,title,list=false,l_id=null){
+            closeMods();
+            const modal=document.getElementById("modalRename");
+            document.getElementById("n_ti").value=title;
+            if(list){
+                document.getElementById("formR").action=`/board/${b_id}/rename_list/${l_id}`;
+            }
+            else{
+                document.getElementById("formR").action=`/board/${b_id}/rename`;
+            }
+            modal.style.display="flex";
+        }
+        function openCMod(l_id,b_id=null,c_id=null,c_ti='',c_de='',fv='',e=false){
+            closeMods();
+            const date=document.getElementById("fv");
+            //const cb=document.getElementById("cb");
+            document.getElementById("modalCard").style.display="flex";
+            document.getElementById("l_id").value=l_id;
+            document.getElementById("titulo").value=c_ti||'';
+            document.getElementById("desc").value=c_de||'';
+            document.getElementById("modCTi").textContent=e?"{{_('Editar Tarjeta')}}":"{{_('Nueva Tarjeta')}}";
+            date.value=fv||'';
+            //cb.checked=!e;
+            //date.disabled=cb.checked;
+            const form=document.getElementById("formC");
+            if(e){
+                form.action=`/board/${b_id}/edit_card/${c_id}`;
+            }else{
+                form.action=`/board/${b_id}/add_card`;
+            }
+        }
+        function closeMods(){
+            document.querySelectorAll('.modal').forEach(modal=>{modal.style.display='none';});
+        }
+        window.addEventListener('keydown',function(e){if(e.key==="Escape")closeMods();});
+    </script>
+</head>
+<body>
+    <div class="navbar">
+        <img src="{{url_for('static',filename='img/logo.png')}}">
+        <div class="act">
+            <a href="/friends">👤{{session['u_name']}}</a>
+            <a href="/boards">{{_('Ver Tableros')}}</a>
+            <a href="/logout">{{_('Cerrar Sesión')}}</a>
+            <a href="/">{{_('Home')}}</a>
+        </div>
+    </div>
+    <h2 style="cursor:pointer;" onclick="openRMod('{{board.id_tablero}}',
+    '{{board.titulo|escape}}')">{{board.titulo}} ✏️</h2>
+    <h3>{{board.descripcion}}</h3>
+    {%if not lists%}
+        <h3 style="color:red;">{{_('Error tablero vacio')}}</h3>
+    {%endif%}
+    <div class="columns">
+        {% for l in lists %}
+            <div class="column">
+                {% if lists|length > 1 %}
+                    <div>
+                        <span class="close" onclick="event.stopPropagation();
+                        delList('{{board.id_tablero}}','{{l.id_lista}}')">✖</span>
+                    </div>
+                {%endif%}
+                    <h4 style="cursor:pointer;" onclick="openRMod(
+                        '{{board.id_tablero}}','{{l.titulo|escape}}',true,'{{l.id_lista}}')">
+                        {{l.titulo}}
+                    </h4>
+                <div class="cards">
+                    {%for c in l.cards%}
+                        <button type="button" class="card" onclick="openCMod(
+                            '{{l.id_lista}}','{{board.id_tablero}}',
+                            '{{c.id_tarjeta}}','{{c.titulo|escape}}',
+                            '{{c.descripcion|escape}}','{{c.fecha_vencimiento}}',true)">
+                            <span class="close" onclick="event.stopPropagation();
+                            delCard('{{board.id_tablero}}','{{c.id_tarjeta}}')">✖</span>
+                            <h4>{{c.titulo}}</h4>
+                            <h5>{{c.descripcion}}</h5>
+                            <h5>{{_('Creada: ')}}{{c.fecha_creacion}}</h5>
+                            <h5>{{_('Vence: ')}}{{c.fecha_vencimiento or 'Nunca'}}</h5>
+                        </button>
+                    {%endfor%}
+                    <a type="button" onclick="openCMod('{{l.id_lista}}',
+                    '{{board.id_tablero}}')">{{_('Agregar Tarjeta')}}</a>
+                </div>
+            </div>
+        {%endfor%}
+        {% if lists|length < 10 %}
+            <div class="columna" style="width:auto;">
+                <a href="/board/{{board.id_tablero}}/add_list" style="font-size: 24px;">＋</a>
+            </div>
+        {%endif%}
+    </div>
+    <form method="POST" action="/delete_board/{{board.id_tablero}}" onsubmit="return confirm('{{et}}')">
+        <button type="submit">{{_('Eliminar Tablero')}}</button>
+    </form>
+</body>
+<div id="modalCard" class="modal" style="display:none;">
+    <div class="modal-content">
+        <span class="close" onclick="closeMods()">✖</span>
+        <h4 id="modCTi">text</h4>
+        <form id="formC" method="POST">
+            <input type="hidden" name="id_lista" id="l_id">
+            <label>{{_('Título de la Tarjeta:')}}</label>
+            <input type="text" name="titulo" id="titulo" required>
+            <label>{{_('Descripción:')}}</label>
+            <textarea name="desc" id="desc" rows="4" oninput="this.style.height='';
+            this.style.height=this.scrollHeight+'px';"></textarea>
+            <label>{{_('Fecha de Vencimiento:')}}</label required>
+            <input type="date" name="fecha_v" id="fv">
+            <!---<div style="display:flex;width:30%;">
+                <label for="ncb" style="margin: 0;">{{_('Nunca')}}</label>
+                <input type="checkbox" name="ncb" id="cb" onchange="toggleFecha()" checked>
+            </div>--->
+            <button type="submit">{{_('Guardar')}}</button>
+        </form>
+    </div>
+</div>
+<div id="modalRename" class="modal" style="display:none;">
+    <div class="modal-content">
+        <span class="close" onclick="closeMods()">✖</span>
+        <h4>{{_('Renombrar')}}</h4>
+        <form id="formR" method="POST">
+            <input type="text" name="nuevo_ti" id="n_ti" required>
+            <button type="submit">{{_('Guardar')}}</button>
+        </form>
+    </div>
+</div>
+</html>

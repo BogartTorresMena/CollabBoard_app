@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{{_('Amigos')}} - CollabBoard</title>
+    <link rel="icon"href="{{url_for('static',filename='img/logo.png')}}"type="image/x-icon">
+    <link rel="stylesheet"href="{{url_for('static',filename='css/style.css')}}">
+    <style>
+        .column{flex:1;}
+    </style>
+    {%set e_msg=session.pop('error',None)%}
+    {%if e_msg%}
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {alert("{{e_msg}}")});
+        </script>
+    {%endif%}
+    <script>
+        function valID(){
+            const nid=document.getElementById("n_id");
+            if(nid.value=="{{session['u_id']}}"){
+                alert("{{_('No puedes usar tu propia ID')}}")
+                return false
+            }
+            else{
+                return true
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="navbar">
+        <img src="{{url_for('static',filename='img/logo.png')}}">
+        <div class="act">
+            <span>👤{{session['u_name']}}</span>
+            <a href="/boards">{{_('Ver Tableros')}}</a>
+            <a href="/logout">{{_('Cerrar Sesión')}}</a>
+            <a href="/">{{_('Home')}}</a>
+        </div>
+    </div>
+    <h2>{{_('Amigos')}}</h2>
+    <form method="POST" action="/add_friend" onsubmit="return valID();">
+        <label>{{_('Buscar por ID:')}}</label>
+        <p>({{_('Tu ID: ')}}{{session['u_id']}})</p>
+        <input type="text" name="n_amigo" id="n_id" inputmode="numeric" pattern="[0-9]*" required>
+        <button type="submit">{{_('Agregar amigo')}}</button>
+    </form>
+    <div class="columns">
+        <div class="column">
+            <h3>{{_('Amigos')}}</h3>
+            {%for f in frs%}
+                <div class="user">
+                    <div class="act">
+                        {{f.name}}
+                        <small>ID: {{f.id}}</small>
+                    </div>
+                    <div class="act">
+                        <form class="formnt" method="POST" action="/friends">
+                            <input type="hidden" name="target" value="{{f.id}}">
+                            <button type="submit" name="accion" value="e"
+                            class="ar" title="{{_('Eliminar')}}">✖</button>
+                        </form>
+                    </div>
+                </div>
+            {% else %}
+                <p>{{_('Agrega amigos para ver tus tableros.')}}</p>
+            {% endfor %}
+        </div>
+        <div class="column">
+            <h3>{{_('Solicitudes Recividas')}}</h3>
+            {%for i in r_in%}
+                <div class="user">
+                    <div class="act">
+                        {{i.name}}
+                        <small>ID: {{i['id_out']}}</small>
+                    </div>
+                    <div class="act">
+                        <form class="formnt" method="POST" action="/friends">
+                            <input type="hidden" name="target" value="{{i['id_out']}}">
+                            <button type="submit" name="accion" value="a"
+                            class="ar" title="{{_('Aceptar')}}">✔</button>
+                            <button type="submit" name="accion" value="i"
+                            class="ar" title="{{_('Ignorar')}}">✖</button>
+                        </form>
+                    </div>
+                </div>
+            {%else%}
+                <p>{{_('No has recibido.')}}</p>
+            {%endfor%}
+        </div>
+
+        <div class="column">
+            <h3>{{_('Solicitudes Enviadas')}}</h3>
+            {%for s in r_out%}
+                <div class="user">
+                    <div class="act">
+                        {{s.name}}
+                        <small>ID: {{s['id_in']}}</small>
+                        {%if s['estado']=='i'%}
+                            {{_('(Ignorado)')}}
+                        {%endif%}
+                    </div>
+                    <div class="act">
+                        <form class="formnt" method="POST" action="/friends">
+                            <input type="hidden" name="target" value="{{s['id_in']}}">
+                            <button type="submit" name="accion" value="e"
+                            class="ar" title="{{_('Cancelar')}}">✖</button>
+                        </form>
+                    </div>
+                </div>
+            {%else%}
+                <p>{{_('No has enviado.')}}</p>
+            {%endfor%}
+        </div>
+    </div>
+</body>
+</html>

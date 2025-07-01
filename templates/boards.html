@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{{_('Mis Tableros')}} - CollabBoard</title>
+    <link rel="icon"href="{{url_for('static',filename='img/logo.png')}}"type="image/x-icon">
+    <link rel="stylesheet"href="{{url_for('static',filename='css/style.css')}}">
+    <style>
+    </style>
+    <script>
+        function openAMod(b_id,acc) {
+            document.getElementById("modalAccess").style.display="flex";
+            document.getElementById("b_id").value=b_id;
+            document.getElementById("modo").value=acc;
+        }
+        function closeMods(){
+            document.querySelectorAll('.modal').forEach(modal=>{modal.style.display='none';});
+        }
+        window.addEventListener('keydown',function(e){if(e.key==="Escape")closeMods();});
+    </script>
+</head>
+<body>
+    <div class="navbar">
+        <img src="{{url_for('static',filename='img/logo.png')}}">
+        <div class="act">
+            <a href="/friends">👤{{session['u_name']}}</a>
+            <a href="/new_board">{{_('Nuevo Tablero')}}</a>
+            <a href="/logout">{{_('Cerrar Sesión')}}</a>
+            <a href="/">{{_('Home')}}</a>
+        </div>
+    </div>
+    <h2>{{_('Mis Tableros')}}</h2>
+    {%if u_boards%}
+    <div class="contenido">
+        <table>
+            <tr>
+                <th style="width:25%">{{_('Título')}}</th>
+                <th style="width:40%">{{_('Descripción')}}</th>
+                <th style="width:15%">{{_('Fecha de creación')}}</th>
+                <th style="background-color:transparent;border:None;"></th>
+                <th style="background-color:transparent;border:None;"></th>
+            </tr>
+            {%for b in u_boards%}
+            <tr>
+                <td>
+                    {{b.titulo}}
+                    {%if b.acceso=='a'%}
+                        (👤)
+                    {%endif%}
+                    {%if b.acceso=='pu'%}
+                        (🌐)
+                    {%endif%}
+                </td>
+                <td>{{b.descripcion or _('--Sin descripción--')}}</td>
+                <td>{{b.fecha_creacion.strftime('%Y-%m-%d')}}</td>
+                <td style="background-color:None;border:None;">
+                    <a type="button" onclick="openAMod('{{b.id_tablero}}','{{b.acceso}}')">
+                        {{_('Compartir')}}
+                    </a>
+                </td>
+                <td style="background-color:None;border:None;">
+                    <a href="/board/{{b.id_tablero}}">
+                        {{_('Ver')}}
+                    </a>
+                </td>
+            </tr>
+            {%endfor%}
+        </table>
+    </div>
+    {%else%}
+        <div class="box">
+            <p class="contenido">{{_('No tienes ningun tablero.')}}</p>
+            <a href="/new_board">{{_('Crear Nuevo Tablero')}}</a>
+        </div>
+    {%endif%}
+</body>
+<div id="modalAccess" class="modal" style="display:none;">
+    <div class="modal-content">
+        <span class="close" onclick="closeMods()">✖</span>
+        <h4>{{_('Cambiar Acceso del Tablero')}}</h4>
+        <form method="POST" action="/boards">
+            <input type="hidden" name="id_tablero" id="b_id">
+            <label for="modo">{{_('Selecciona:')}}</label>
+            <select style="margin-bottom:10px;" name="modo" id="modo" required>
+                <option value="pr">{{_('Privado')}}</option>
+                <option value="a">{{_('Amigos')}}</option>
+                <option value="pu">{{_('Público')}}</option>
+            </select>
+            <button type="submit">{{_('Guardar')}}</button>
+        </form>
+    </div>
+</div>
+</html>

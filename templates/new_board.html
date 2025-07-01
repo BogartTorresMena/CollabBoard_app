@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{_('Nuevo Tablero')}} - CollabBoard</title>
+    <link rel="icon"href="{{url_for('static',filename='img/logo.png')}}"type="image/x-icon">
+    <link rel="stylesheet"href="{{url_for('static',filename='css/style.css')}}">
+    <style>
+        form{width:400px;}
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <img src="{{url_for('static',filename='img/logo.png')}}">
+        <div class="act">
+            <a href="/friends">👤{{session['u_name']}}</a>
+            <a href="/boards">{{_('Ver Tableros')}}</a>
+            <a href="/logout">{{_('Cerrar Sesión')}}</a>
+            <a href="/">{{_('Home')}}</a>
+        </div>
+    </div>
+    <h2>{{_('Crear un nuevo tablero')}}</h2>
+    <form method="POST">
+        <label>{{_('Título del Tablero:')}}</label>
+        <input type="text" name="title" required>
+        <label>{{_('Descripción:')}}</label>
+        <textarea name="desc" rows="4" oninput="this.style.height='';
+        this.style.height=this.scrollHeight+'px';"></textarea>
+        <label>{{_('Número de listas:')}}</label>
+        <input type="number" name="num_listas" value="3" min="1" max="10" required>
+        <label>{{_('Acceso:')}}</label>
+        <select style="margin-bottom:10px;" name="modo" required>
+            <option value="pr">{{_('Privado')}}</option>
+            <option value="a">{{_('Amigos')}}</option>
+            <option value="pu">{{_('Público')}}</option>
+        </select>
+        <button type="submit">{{_('Crear Tablero')}}</button>
+    </form>
+</body>
+</html>

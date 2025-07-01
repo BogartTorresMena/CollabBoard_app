@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{_('Registro')}} - CollabBoard</title>
+    <link rel="icon"href="{{url_for('static',filename='img/logo.png')}}"type="image/x-icon">
+    <link rel="stylesheet"href="{{url_for('static',filename='css/style.css')}}">
+    <style>
+        form{width:500px;}
+    </style>
+    <script>
+        function valForm(){
+            const pass=document.getElementById("pass").value;
+            const pass2=document.getElementById("r_pass").value;
+            if (pass!==pass2) {
+                alert("{{_('Las contraseñas no coinciden.')}}");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <div class="navbar">
+        <img src="{{url_for('static',filename='img/logo.png')}}">
+        <div class="act">
+            <a href="/">{{_('Home')}}</a>
+        </div>
+    </div>
+    <h2>{{_('Registro')}}</h2>
+    <form method="POST" action="/register" onsubmit="return valForm();">
+        <label>{{_('Nombre:')}}</label>
+        <input type="text" name="name" required>
+        <label>{{_('Correo Electrónico:')}}</label>
+        <input type="email" name="email" required>
+        <label>{{_('Contraseña:')}}</label>
+        <input type="password" name="password" id="pass" required>
+        <label>{{_('Repetir Contraseña:')}}</label>
+        <input type="password" id="r_pass" required>
+        <button type="submit">{{_('Registrarse')}}</button>
+    </form>
+    <div class="box">
+        <a href="/login">{{_('o Inicia Sesión')}}</a>
+    </div>
+</body>
+</html>

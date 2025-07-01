@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{{_('Inicio')}} - CollabBoard</title>
+    <link rel="icon"href="{{url_for('static', filename='img/logo.png')}}"type="image/x-icon">
+    <link rel="stylesheet"href="{{url_for('static',filename='css/style.css')}}">
+    <style>
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <img src="{{url_for('static',filename='img/logo.png')}}">
+        <div class="act">
+           {%if session.get('u_name')%}
+                <a href="/friends">👤{{session['u_name']}}</a>
+                <a href="/boards">{{_('Ver Tableros')}}</a>
+                <a href="/logout">{{_('Cerrar Sesión')}}</a>
+           {%else%}
+                <a href="/login">{{_('Iniciar Sesión')}}</a>
+                <a href="/register">{{_('Registrarse')}}</a>
+           {%endif%}
+        </div>
+    </div>
+    <div class="contenido">
+        <h1>{{_('CollabBoard')}}</h1>
+    <div class="box">
+        <a href="/new_board">{{_('Crear un Tablero')}}</a>
+    </div>
+</html>

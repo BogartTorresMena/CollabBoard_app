@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{_('Login')}} - CollabBoard</title>
+    <link rel="icon"href="{{url_for('static',filename='img/logo.png')}}"type="image/x-icon">
+    <link rel="stylesheet"href="{{url_for('static',filename='css/style.css')}}">
+    <style>
+    </style>
+    <script>
+        function valForm(){
+            if("{{error or ''}}"){
+                alert("{{_('Correo o contraseña incorrectos')}}");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <div class="navbar">
+        <img src="{{url_for('static',filename='img/logo.png')}}">
+        <div class="act">
+            <a href="/">{{_('Home')}}</a>
+        </div>
+    </div>
+    </div>
+    <h2>{{_('Inicio de sesión')}}</h2>
+    <form method="POST" action="/login" onsubmit="return valForm();">
+        <label>{{_('Correo Electrónico:')}}</label>
+        <input type="email" name="email" required>
+        <label>{{_('Contraseña:')}}</label>
+        <input type="password" name="password" required>
+        <button type="submit">{{_('Iniciar Sesión')}}</button>
+    </form>
+    <div class="box">
+        <a href="/register">{{_('o Regístrate')}}</a>
+    </div>
+</body>
+</html>
