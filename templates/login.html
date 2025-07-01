@@ -7,15 +7,13 @@
     <link rel="stylesheet"href="{{url_for('static',filename='css/style.css')}}">
     <style>
     </style>
-    <script>
-        function valForm(){
-            if("{{error or ''}}"){
-                alert("{{_('Correo o contraseña incorrectos')}}");
-                return false;
-            }
-            return true;
-        }
-    </script>
+    {%if error%}
+        <script>
+            window.addEventListener('DOMContentLoaded',function(){
+                alert("{{_('Correo o contraseña incorrectos')}}")
+            });
+        </script>
+    {%endif%}
 </head>
 <body>
     <div class="navbar">
@@ -26,7 +24,7 @@
     </div>
     </div>
     <h2>{{_('Inicio de sesión')}}</h2>
-    <form method="POST" action="/login" onsubmit="return valForm();">
+    <form method="POST" action="/login">
         <label>{{_('Correo Electrónico:')}}</label>
         <input type="email" name="email" required>
         <label>{{_('Contraseña:')}}</label>

@@ -106,7 +106,7 @@ def register():
 def login():
     if 'u_id' in session:
         return redirect(url_for('home'))
-    error=None
+    error=0
     if request.method=='POST':
         em=request.form['email']
         pa=request.form['password']
