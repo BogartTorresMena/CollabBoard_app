@@ -498,7 +498,7 @@ def friends():
         return f"Error loading friends: {e}"
     finally:
         con.close()
-    return render_template('friends.html',fr=frs,r_in=inbox,r_out=sent,u_id=u_id)
+    return render_template('friends.html',frs=frs,r_in=inbox,r_out=sent,u_id=u_id)
 
 @app.route('/add_friend',methods=['POST'])
 def add_friend():

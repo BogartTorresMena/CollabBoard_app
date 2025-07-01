@@ -24,7 +24,7 @@ msgstr "Board does not exist or you are not authorized"
 
 #: app.py:244
 msgid "¿Eliminar este tablero? No se puede deshacer"
-msgstr "Delete this board? Can't be undone"
+msgstr "Delete this board? Cannot be undone"
 
 #: app.py:252 app.py:293 app.py:319 app.py:340 app.py:372 app.py:399 app.py:427
 msgid "No autorizado"
@@ -36,11 +36,11 @@ msgstr "No user has this ID"
 
 #: app.py:524
 msgid "Este usuario ya es tu amigo o tiene solicitud pendiente."
-msgstr "You're already friends with this user or has a pending request."
+msgstr "You are already friends with this user or has a pending request."
 
 #: templates/board.html:21
 msgid "¿Eliminar lista? También se eliminarán sus tarjetas"
-msgstr "Delete list? All it's cards will be deleted"
+msgstr "Delete list? All cards from this list will be deleted"
 
 #: templates/board.html:49
 msgid "Editar Tarjeta"
@@ -173,7 +173,7 @@ msgstr "Public"
 
 #: templates/friends.html:21
 msgid "No puedes usar tu propia ID"
-msgstr "You can't use your own ID"
+msgstr "You cannot use your own ID"
 
 #: templates/friends.html:42
 msgid "Buscar por ID:"
